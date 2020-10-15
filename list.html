@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8"> 
+  <title>通讯录列表页面</title>
+  <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+  <script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+  <script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</head>
+<body>
+
+<table class="table table-hover table-bordered" id="mytable">
+    <thead>
+        <tr>
+            <th>姓名</th>
+            <th>电话</th>
+            <th>邮箱</th>
+            <th>住址</th>
+            <th>QQ号</th>
+            <th>操作</th>
+        </tr>
+    </thead>
+    <tbody id="listTable">    
+        <tr>
+            <td>潘佳安</td>
+            <td>18811171963</td>
+            <td>592309718@qq.com</td>
+            <td>北京邮电大学</td>
+            <td>592309718</td>
+            <td>
+                <input type="button" name="" value="删除" class="btn btn-danger" onclick="del(this)" />
+                <input type="button" name="" value="修改" class="btn btn-info" onclick="modify(this)" />
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+<form>
+    <table class="table table-hover table-bordered">
+        <tr>
+            <th>姓名</th>
+            <td><input type="text" name="" class="form-control" id="name" /></td>
+        </tr>
+        <tr>
+            <th>电话</th>
+            <td><input type="text" name="" class="form-control" id="phone" /></td>
+        </tr>
+        <tr>
+            <th>邮箱</th>
+            <td><input type="text" name="" class="form-control" id="email" /></td>
+        </tr>
+        <tr>
+            <th>住址</th>
+            <td><input type="text" name="" class="form-control" id="home" /></td>
+        </tr>
+        <tr>
+            <th>QQ号</th>
+            <td><input type="text" name="" class="form-control" id="QQ" /></td>
+        </tr>
+        <tr>
+            <td colspan="2">
+                <center><input type="reset" value="重置" class="btn btn-primary" id="reset" />   
+               <!-- <input type="button" value="添加"  class="btn btn-success" id="add"  onclick="addList()" /> -->
+               <a onclick="location='add.html';return false" href="#">
+        <input type="button" value="添加"  class="btn btn-success" id="add" />
+ </a>
+                <input type="button" value="更新"  class="btn btn-info" id=""  onclick="update()" /></center>
+            </td>
+        </tr>
+    </table>
+</form>
+<script type="text/javascript">
+  function addList(){
+        var oName = document.getElementById('name').value;
+        var oPhone = document.getElementById('phone').value;
+        var oEmail = document.getElementById('email').value;
+        var oHome = document.getElementById('home').value;
+        var oQQ = document.getElementById('QQ').value;
+        var oTr = document.createElement('tr');
+        var oTd1 = document.createElement('td');
+        oTd1.innerHTML = oName;
+        var oTd2 = document.createElement('td');
+        oTd2.innerHTML = oPhone;
+        var oTd3 = document.createElement('td');
+        oTd3.innerHTML = oEmail;
+        var oTd4 = document.createElement('td');
+        oTd4.innerHTML = oHome;
+        var oTd5 = document.createElement('td');
+        oTd5.innerHTML = oQQ;
+        var oTd6 = document.createElement('td');
+        var oInput1 = document.createElement('input');
+        var oInput2 = document.createElement('input');
+        oInput1.setAttribute('type','button');
+        oInput1.setAttribute('value','删除');
+        oInput1.setAttribute('onclick','del(this)');
+        oInput1.className = 'btn btn-danger';
+        oInput2.setAttribute('type','button');
+        oInput2.setAttribute('value','修改');
+        oInput2.setAttribute('onclick','modify(this)');
+        oInput2.className = 'btn btn-info';
+        oTd6.appendChild(oInput1);
+        oTd6.appendChild(oInput2);
+        oTr.appendChild(oTd1);
+        oTr.appendChild(oTd2);
+        oTr.appendChild(oTd3);
+        oTr.appendChild(oTd4);
+        oTr.appendChild(oTd5);
+        oTr.appendChild(oTd6);
+        var olistTable = document.getElementById('listTable');
+        olistTable.appendChild(oTr);
+    }
+
+    function del(obj){
+        var oParentnode = obj.parentNode.parentNode;
+        var olistTable = document.getElementById('listTable');
+        olistTable.removeChild(oParentnode);
+    }
+
+    function modify(obj){
+        var oName = document.getElementById('name');
+        var oPhone = document.getElementById('phone');
+        var oEmail = document.getElementById('email');
+        var oHome = document.getElementById('home');
+        var oQQ = document.getElementById('QQ');
+        var oTr = obj.parentNode.parentNode;
+        var aTd = oTr.getElementsByTagName('td');
+        rowIndex = obj.parentNode.parentNode.rowIndex;  
+        oName.value = aTd[0].innerHTML;
+        oPhone.value = aTd[1].innerHTML;
+        oEmail.value = aTd[2].innerHTML;
+        oHome.value = aTd[3].innerHTML;
+        oQQ.value = aTd[4].innerHTML;
+    }
+    function update(){
+        var oName = document.getElementById('name');
+        var oPhone = document.getElementById('phone');
+        var oEmail = document.getElementById('email');
+        var oHome = document.getElementById('home');
+        var oQQ = document.getElementById('QQ');
+        var oMytable = document.getElementById('mytable');
+        oMytable.rows[rowIndex].cells[0].innerHTML = oName.value;
+        oMytable.rows[rowIndex].cells[1].innerHTML = oPhone.value;
+        oMytable.rows[rowIndex].cells[2].innerHTML = oEmail.value;
+        oMytable.rows[rowIndex].cells[3].innerHTML = oHome.value;
+        oMytable.rows[rowIndex].cells[4].innerHTML = oQQ.value;
+    }
+
+</script>>
+
+</body>
+</html>
